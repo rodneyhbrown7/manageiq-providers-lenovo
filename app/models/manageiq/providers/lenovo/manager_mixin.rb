@@ -38,6 +38,15 @@ module ManageIQ::Providers::Lenovo::ManagerMixin
     true
   end
 
+  def console_supported?
+    true
+  end
+
+  def console_url
+    URI::HTTPS.build(:host => hostname,
+                     :port => port)
+  end
+
   module ClassMethods
     def raw_connect(username, password, host, port, auth_type, verify_ssl)
       xclarity = XClarityClient::Configuration.new(
